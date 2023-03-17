@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MvcCoreSeguridadEmpleados.Filters;
 using MvcCoreSeguridadEmpleados.Models;
 using MvcCoreSeguridadEmpleados.Repositories;
 
@@ -12,6 +13,13 @@ namespace MvcCoreSeguridadEmpleados.Controllers
         {
             this.repo = repo;
         }
+
+        [AuthorizeEmpleados]
+        public IActionResult PerfilEmpleado()
+        {
+            return View();
+        }
+
 
         public async Task< IActionResult> Index()
         {
