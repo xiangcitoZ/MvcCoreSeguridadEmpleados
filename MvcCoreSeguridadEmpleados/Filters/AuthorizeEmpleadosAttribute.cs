@@ -14,6 +14,17 @@ namespace MvcCoreSeguridadEmpleados.Filters
             {
                 context.Result = this.GetRoute("Managed", "LogIn");
             }
+            else
+            {
+                if(user.IsInRole("PRESIDENTE") == false
+                    && user.IsInRole("DIRECTOR") == false
+                    && user.IsInRole("ANALISTA") == false) 
+                {
+                    context.Result =
+                        this.GetRoute("Managed", "ErrorAcceso");
+                }
+
+            }
         }
 
         private RedirectToRouteResult GetRoute
