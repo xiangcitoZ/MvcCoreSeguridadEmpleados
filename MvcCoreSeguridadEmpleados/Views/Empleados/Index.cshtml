@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MvcCoreSeguridadEmpleados.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index Empleados</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oficio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departamento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Apellido</td>
+            <td>@item.Oficio</td>
+            <td>@item.Salario</td>
+            <td>@item.Departamento</td>
+            <td>
+                <a asp-controller="Empleados"
+                    asp-action="Details"
+                    asp-route-idempleado="@item.IdEmpleado"
+                    class="btn btn-info">
+                    Details
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
