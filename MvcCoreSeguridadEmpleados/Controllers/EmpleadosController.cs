@@ -34,5 +34,18 @@ namespace MvcCoreSeguridadEmpleados.Controllers
                 this.repo.FindEmpleadoAsync(idempleado);
             return View(empleado);
         }
+
+
+        [AuthorizeEmpleados]
+        public async Task<IActionResult> Compis()
+        {
+            string dato =
+                HttpContext.User.FindFirst("Departamento").Value;
+            int iddepartamento = int.Parse(dato);
+            List<Empleado> empleados =
+                await this.repo.GetEmpleadosDepartamentoAsync(iddepartamento);
+            return View(empleados);
+        }
+
     }
 }

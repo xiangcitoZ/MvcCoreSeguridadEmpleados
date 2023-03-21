@@ -4,6 +4,9 @@ using MvcCoreSeguridadEmpleados.Data;
 using MvcCoreSeguridadEmpleados.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 
 //SEGURIDAD
 builder.Services.AddAuthentication(options =>
@@ -24,7 +27,8 @@ builder.Services.AddDbContext<EmpleadosContext>
 //INDICAMOS QUE UTILIZAMOS NUESTRA PROPIAS RUTAS
 //DE VALIDACION
 builder.Services.AddControllersWithViews(
-    options => options.EnableEndpointRouting = false);
+    options => options.EnableEndpointRouting = false)
+    .AddSessionStateTempDataProvider();
 
 var app = builder.Build();
 
@@ -43,6 +47,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSession();
 app.UseMvc(routes =>
 {
     routes.MapRoute(

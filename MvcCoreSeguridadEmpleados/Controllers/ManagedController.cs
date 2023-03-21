@@ -56,6 +56,10 @@ namespace MvcCoreSeguridadEmpleados.Controllers
                 await HttpContext.SignInAsync
                     (CookieAuthenticationDefaults.AuthenticationScheme
                     , userPrincipal);
+                string controller = TempData["controller"].ToString();
+                string action = TempData["action"].ToString();
+
+
                 return RedirectToAction("PerfilEmpleado", "Empleados");
             }
             else
@@ -74,7 +78,7 @@ namespace MvcCoreSeguridadEmpleados.Controllers
         {
             await HttpContext.SignOutAsync
                 (CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("PerfilEmpleado", "Empleados");
         }
 
     }
